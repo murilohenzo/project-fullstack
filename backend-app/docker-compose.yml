@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  pgsql:
+    image: postgres:alpine
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_USER: adm
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DATABASE: project
