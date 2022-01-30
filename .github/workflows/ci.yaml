@@ -1,4 +1,9 @@
 name: ci-nodejs-workflow
+
+defaults:
+  run:
+    working-directory: backend-app
+
 on: 
   push:
     branches:
