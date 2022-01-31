@@ -9,8 +9,8 @@
 - [] Impedir que um nível seja removido quando houver um (ou mais) desenvolvedor(es) associado a este
 - [] Adicionar funcionalidade de busca via query string para a listagem de níveis
 ### Casos de Usos de Desenvolvedores
-- [] Listar desenvolvedores existentes
-- [] Cadastrar um desenvolvedor
+- [x] Cadastrar um desenvolvedor
+- [x] Listar desenvolvedores existentes
 - [] Editar um desenvolvedor
 - [] Remover um desenvolvedor
 - [] Adicionar funcionalidade de busca via query string para a listagem de desenvolvedores

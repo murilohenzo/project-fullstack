@@ -9,6 +9,10 @@ export class DevelopersRepository implements InterfaceDevelopersRepository {
   constructor() {
     this.ormRepository = getRepository(Developer);
   }
+  async findAll(): Promise<Developer[] | undefined> {
+    const developers = await this.ormRepository.find();
+    return developers;
+  }
 
   async create(
     developer: InterfaceCreateDeveloperDTO

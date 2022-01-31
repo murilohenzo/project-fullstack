@@ -7,6 +7,10 @@ export class DevelopersRepositoryInMemory
 {
   private developers: Developer[] = [];
 
+  async findAll(): Promise<Developer[] | undefined> {
+    return this.developers;
+  }
+
   async create(developer: InterfaceCreateDeveloperDTO): Promise<Developer> {
     const developerObj = new Developer();
 
