@@ -5,4 +5,5 @@ export interface InterfaceDevelopersRepository {
   create(
     developer: InterfaceCreateDeveloperDTO
   ): Promise<Developer | undefined>;
+  findAll(): Promise<Developer[] | undefined>;
 }
