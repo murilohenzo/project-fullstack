@@ -23,4 +23,9 @@ developersRoutes.put("/:id", (request: Request, response: Response) => {
   return developerController.update(request, response);
 });
 
+developersRoutes.delete("/:id", (request: Request, response: Response) => {
+  const developerController = new DeveloperController();
+  return developerController.delete(request, response);
+});
+
 export { developersRoutes };

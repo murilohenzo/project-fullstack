@@ -8,6 +8,7 @@ import { CreateDeveloperUseCase } from "../../useCases/createDeveloperUseCase";
 import { ListDevelopersUseCase } from "../../useCases/listDevelopersUseCase";
 import { UpdateDeveloperUseCase } from "../../useCases/updateDeveloperUseCase";
 import { GetDeveloperUseCase } from "../../useCases/getDeveloperUseCase";
+import { DeleteDeveloperUseCase } from "../../useCases/deleteDeveloperUseCase";
 
 export class DeveloperController {
   async create(
@@ -87,6 +88,31 @@ export class DeveloperController {
         return response
           .status(error.Statuscode)
           .json({ developer: {}, message: error.message });
+      }
+      return response
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: error.message });
+    }
+  }
+
+  async delete(
+    request: Request,
+    response: Response
+  ): Promise<Response | undefined> {
+    try {
+      const { id } = request.params;
+
+      const developerService = container.resolve(DeleteDeveloperUseCase);
+      const developers = await developerService.execute(parseInt(id));
+
+      return response
+        .status(StatusCodes.OK)
+        .json({ message: "Desenvolvedor deletado com sucesso." });
+    } catch (error: any) {
+      if (error.Statuscode) {
+        return response
+          .status(error.Statuscode)
+          .json({ message: error.message });
       }
       return response
         .status(StatusCodes.BAD_REQUEST)
