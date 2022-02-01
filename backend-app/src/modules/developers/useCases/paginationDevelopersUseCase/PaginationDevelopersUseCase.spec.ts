@@ -18,37 +18,37 @@ describe("PaginationDevelopersUseCase", () => {
     );
 
     await developerService.execute({
-      level: "JUNIOR",
+      level_id: 1,
       name: "John Doe",
       sex: "MALE",
-      birthDate: new Date(),
+      birth_date: new Date(),
       age: 21,
       hobby: "Assistir anime",
     });
 
     await developerService.execute({
-      level: "JUNIOR",
+      level_id: 1,
       name: "John Doe",
       sex: "MALE",
-      birthDate: new Date(),
+      birth_date: new Date(),
       age: 21,
       hobby: "Assistir anime",
     });
 
     await developerService.execute({
-      level: "JUNIOR",
+      level_id: 1,
       name: "Mary",
       sex: "FEMALE",
-      birthDate: new Date(),
+      birth_date: new Date(),
       age: 21,
       hobby: "Assistir anime",
     });
 
     await developerService.execute({
-      level: "JUNIOR",
+      level_id: 1,
       name: "Mary",
       sex: "FEMALE",
-      birthDate: new Date(),
+      birth_date: new Date(),
       age: 21,
       hobby: "Assistir anime",
     });
