@@ -44,4 +44,23 @@ export class DevelopersRepository implements InterfaceDevelopersRepository {
   async delete(id: number): Promise<void> {
     await this.ormRepository.delete(id);
   }
+
+  async search(name: string): Promise<Developer[] | undefined> {
+    const developers: Developer[] = await this.ormRepository.query(
+      `select * from developers where developers.name ilike '${name}%'`
+    );
+    return developers;
+  }
+
+  async pagination(
+    take: number,
+    page: number
+  ): Promise<Developer[] | undefined> {
+    const developers: Developer[] = await this.ormRepository.find({
+      take,
+      skip: take * (page - 1),
+    });
+
+    return developers;
+  }
 }

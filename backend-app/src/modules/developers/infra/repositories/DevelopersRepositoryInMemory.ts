@@ -52,4 +52,17 @@ export class DevelopersRepositoryInMemory
       (developer) => developer.id !== id
     );
   }
+
+  async search(name: string): Promise<Developer[] | undefined> {
+    const developers = this.developers.filter((dev) => dev.name === `${name}`);
+    return developers;
+  }
+
+  async pagination(
+    take: number,
+    page: number
+  ): Promise<Developer[] | undefined> {
+    const developers = this.developers.slice((page - 1) * take, page * take);
+    return developers;
+  }
 }
