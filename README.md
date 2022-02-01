@@ -12,5 +12,6 @@
 - [x] Cadastrar um desenvolvedor
 - [x] Listar desenvolvedores existentes
 - [x] Editar um desenvolvedor
+- [x] Pegar desenvolvedor pelo id
 - [] Remover um desenvolvedor
 - [] Adicionar funcionalidade de busca via query string para a listagem de desenvolvedores

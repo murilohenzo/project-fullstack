@@ -5,11 +5,11 @@ describe("CreateDeveloperUseCase", () => {
   it("should be able to create developer", async () => {
     const developersRepositoryInMemory = new DevelopersRepositoryInMemory();
 
-    const createDeveloper = new CreateDeveloperUseCase(
+    const developerService = new CreateDeveloperUseCase(
       developersRepositoryInMemory
     );
 
-    const developer = await createDeveloper.execute({
+    const developer = await developerService.execute({
       level: "JUNIOR",
       name: "John Doe",
       sex: "MALE",
