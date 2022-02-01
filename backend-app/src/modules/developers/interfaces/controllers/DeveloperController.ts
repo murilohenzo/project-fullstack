@@ -9,6 +9,8 @@ import { ListDevelopersUseCase } from "../../useCases/listDevelopersUseCase";
 import { UpdateDeveloperUseCase } from "../../useCases/updateDeveloperUseCase";
 import { GetDeveloperUseCase } from "../../useCases/getDeveloperUseCase";
 import { DeleteDeveloperUseCase } from "../../useCases/deleteDeveloperUseCase";
+import { SearchDeveloperUseCase } from "../../useCases/searchDevelopersUseCase";
+import { PaginationDevelopersUseCase } from "../../useCases/paginationDevelopersUseCase";
 
 export class DeveloperController {
   async create(
@@ -113,6 +115,54 @@ export class DeveloperController {
         return response
           .status(error.Statuscode)
           .json({ message: error.message });
+      }
+      return response
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: error.message });
+    }
+  }
+
+  async search(
+    request: Request,
+    response: Response
+  ): Promise<Response | undefined> {
+    try {
+      const { name } = request.query;
+
+      const developerService = container.resolve(SearchDeveloperUseCase);
+      // @ts-ignore
+      const developers = await developerService.execute(name);
+
+      return response.status(StatusCodes.OK).json(developers);
+    } catch (error: any) {
+      if (error.Statuscode) {
+        return response
+          .status(error.Statuscode)
+          .json({ developer: {}, message: error.message });
+      }
+      return response
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: error.message });
+    }
+  }
+
+  async pagination(
+    request: Request,
+    response: Response
+  ): Promise<Response | undefined> {
+    try {
+      const { take, page } = request.body;
+
+      const developerService = container.resolve(PaginationDevelopersUseCase);
+      // @ts-ignore
+      const developers = await developerService.execute(take, page);
+
+      return response.status(StatusCodes.OK).json(developers);
+    } catch (error: any) {
+      if (error.Statuscode) {
+        return response
+          .status(error.Statuscode)
+          .json({ developer: {}, message: error.message });
       }
       return response
         .status(StatusCodes.BAD_REQUEST)

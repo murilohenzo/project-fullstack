@@ -14,4 +14,5 @@
 - [x] Editar um desenvolvedor
 - [x] Pegar desenvolvedor pelo id
 - [x] Remover um desenvolvedor
-- [] Adicionar funcionalidade de busca via query string para a listagem de desenvolvedores
+- [x] Adicionar funcionalidade de busca via query string para a listagem de desenvolvedores
+- [x] Adicionar paginação na listagem de desenvolvedores

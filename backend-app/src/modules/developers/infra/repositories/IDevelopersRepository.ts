@@ -12,4 +12,6 @@ export interface InterfaceDevelopersRepository {
     developer: InterfaceCreateDeveloperDTO
   ): Promise<Developer | undefined>;
   delete(id: number): Promise<void>;
+  search(name: string): Promise<Developer[] | undefined>;
+  pagination(take: number, page: number): Promise<Developer[] | undefined>;
 }

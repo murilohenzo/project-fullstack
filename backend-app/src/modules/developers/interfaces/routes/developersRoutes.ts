@@ -28,4 +28,14 @@ developersRoutes.delete("/:id", (request: Request, response: Response) => {
   return developerController.delete(request, response);
 });
 
+developersRoutes.post("/search", (request: Request, response: Response) => {
+  const developerController = new DeveloperController();
+  return developerController.search(request, response);
+});
+
+developersRoutes.post("/pagination", (request: Request, response: Response) => {
+  const developerController = new DeveloperController();
+  return developerController.pagination(request, response);
+});
+
 export { developersRoutes };
