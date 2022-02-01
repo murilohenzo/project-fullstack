@@ -6,4 +6,9 @@ export interface InterfaceDevelopersRepository {
     developer: InterfaceCreateDeveloperDTO
   ): Promise<Developer | undefined>;
   findAll(): Promise<Developer[] | undefined>;
+  findById(id: number): Promise<Developer | undefined>;
+  update(
+    id: number,
+    developer: InterfaceCreateDeveloperDTO
+  ): Promise<Developer | undefined>;
 }

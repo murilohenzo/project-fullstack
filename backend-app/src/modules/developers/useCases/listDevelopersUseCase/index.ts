@@ -16,7 +16,7 @@ export class ListDevelopersUseCase {
   async execute(): Promise<Developer[] | undefined> {
     const developers = await this.developersRepository.findAll();
 
-    if (developers && developers?.length > 0) {
+    if (developers && developers.length > 0) {
       return developers;
     }
     throw new AppError(

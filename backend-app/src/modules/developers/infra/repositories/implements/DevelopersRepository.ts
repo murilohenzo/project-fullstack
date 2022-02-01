@@ -14,6 +14,11 @@ export class DevelopersRepository implements InterfaceDevelopersRepository {
     return developers;
   }
 
+  async findById(id: number): Promise<Developer | undefined> {
+    const developer = await this.ormRepository.findOne(id);
+    return developer;
+  }
+
   async create(
     developer: InterfaceCreateDeveloperDTO
   ): Promise<Developer | undefined> {
@@ -22,5 +27,17 @@ export class DevelopersRepository implements InterfaceDevelopersRepository {
     await this.ormRepository.save(developerObj);
 
     return developerObj;
+  }
+
+  async update(
+    id: number,
+    _developer: InterfaceCreateDeveloperDTO
+  ): Promise<Developer | undefined> {
+    const developer = await this.ormRepository.save({
+      id,
+      ..._developer,
+    });
+
+    return developer;
   }
 }

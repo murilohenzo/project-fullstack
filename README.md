@@ -11,6 +11,6 @@
 ### Casos de Usos de Desenvolvedores
 - [x] Cadastrar um desenvolvedor
 - [x] Listar desenvolvedores existentes
-- [] Editar um desenvolvedor
+- [x] Editar um desenvolvedor
 - [] Remover um desenvolvedor
 - [] Adicionar funcionalidade de busca via query string para a listagem de desenvolvedores
