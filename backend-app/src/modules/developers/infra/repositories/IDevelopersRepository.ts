@@ -11,4 +11,5 @@ export interface InterfaceDevelopersRepository {
     id: number,
     developer: InterfaceCreateDeveloperDTO
   ): Promise<Developer | undefined>;
+  delete(id: number): Promise<void>;
 }

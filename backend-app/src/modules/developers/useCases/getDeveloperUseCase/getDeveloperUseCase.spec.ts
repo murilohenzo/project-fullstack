@@ -45,10 +45,10 @@ describe("GetDeveloperUseCaseHandleException", () => {
     expect.assertions(1);
 
     try {
-      const listDevelopers = new GetDeveloperUseCase(
+      const developerService = new GetDeveloperUseCase(
         developersRepositoryInMemory
       );
-      await listDevelopers.execute(10);
+      await developerService.execute(10);
     } catch (error) {
       expect(error).toBeInstanceOf(AppError);
     }

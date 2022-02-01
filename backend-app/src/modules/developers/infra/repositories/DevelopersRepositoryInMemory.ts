@@ -19,7 +19,9 @@ export class DevelopersRepositoryInMemory
   async create(developer: InterfaceCreateDeveloperDTO): Promise<Developer> {
     const developerObj = new Developer();
 
-    Object.assign(developerObj, { id: 1 }, developer);
+    const id = this.developers.length + 1;
+
+    Object.assign(developerObj, { id }, developer);
 
     this.developers.push(developerObj);
 
@@ -43,5 +45,11 @@ export class DevelopersRepositoryInMemory
       return developer;
     }
     return {} as Developer;
+  }
+
+  async delete(id: number): Promise<void> {
+    this.developers = this.developers.filter(
+      (developer) => developer.id !== id
+    );
   }
 }

@@ -40,4 +40,8 @@ export class DevelopersRepository implements InterfaceDevelopersRepository {
 
     return developer;
   }
+
+  async delete(id: number): Promise<void> {
+    await this.ormRepository.delete(id);
+  }
 }
