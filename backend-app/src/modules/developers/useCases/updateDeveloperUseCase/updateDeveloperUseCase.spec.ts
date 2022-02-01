@@ -2,12 +2,12 @@
 import { InterfaceDevelopersRepository } from "../../infra/repositories/IDevelopersRepository";
 import { DevelopersRepositoryInMemory } from "../../infra/repositories/DevelopersRepositoryInMemory";
 import { CreateDeveloperUseCase } from "../createDeveloperUseCase";
-import { ListDevelopersUseCase } from "./index";
+import { UpdateDeveloperUseCase } from "./index";
 
 import { AppError } from "../../../../shared/errors/AppError";
 
 let developersRepositoryInMemory: InterfaceDevelopersRepository;
-describe("ListDevelopersUseCase", () => {
+describe("UpdateDeveloperUseCase", () => {
   beforeAll(() => {
     developersRepositoryInMemory = new DevelopersRepositoryInMemory();
   });
@@ -26,17 +26,24 @@ describe("ListDevelopersUseCase", () => {
       hobby: "Assistir anime",
     });
   });
-  it("should be able to list developers", async () => {
-    const listDevelopers = new ListDevelopersUseCase(
+  it("should be able to update developer", async () => {
+    const updateDeveloper = new UpdateDeveloperUseCase(
       developersRepositoryInMemory
     );
-    const developers = await listDevelopers.execute();
-    expect(developers?.[0]).toHaveProperty("level");
-    expect(developers).toHaveLength(1);
+    const developer = await updateDeveloper.execute(1, {
+      level: "PLENO",
+      name: "John Doe",
+      sex: "MALE",
+      birthDate: new Date(),
+      age: 22,
+      hobby: "Assistir series",
+    });
+    expect(developer).toHaveProperty("level");
+    expect(developer?.age).toEqual(22);
   });
 });
 
-describe("ListDevelopersUseCaseHandleException", () => {
+describe("UpdateDeveloperUseCaseHandleException", () => {
   beforeAll(() => {
     developersRepositoryInMemory = new DevelopersRepositoryInMemory();
   });
@@ -45,10 +52,17 @@ describe("ListDevelopersUseCaseHandleException", () => {
     expect.assertions(1);
 
     try {
-      const listDevelopers = new ListDevelopersUseCase(
+      const listDevelopers = new UpdateDeveloperUseCase(
         developersRepositoryInMemory
       );
-      await listDevelopers.execute();
+      await listDevelopers.execute(1, {
+        level: "",
+        name: "",
+        sex: "",
+        birthDate: new Date(),
+        age: 0,
+        hobby: "",
+      });
     } catch (error) {
       expect(error).toBeInstanceOf(AppError);
     }

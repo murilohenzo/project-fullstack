@@ -1,9 +1,7 @@
-type sex = "FEMALE" | "MALE";
-
 export interface InterfaceCreateDeveloperDTO {
   level: string;
   name: string;
-  sex: sex;
+  sex: string;
   birthDate: Date;
   age: number;
   hobby: string;
