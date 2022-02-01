@@ -10,15 +10,15 @@ describe("CreateDeveloperUseCase", () => {
     );
 
     const developer = await developerService.execute({
-      level: "JUNIOR",
+      level_id: 1,
       name: "John Doe",
       sex: "MALE",
-      birthDate: new Date(),
+      birth_date: new Date(),
       age: 21,
       hobby: "Assistir anime",
     });
 
-    expect(developer).toHaveProperty("level");
+    expect(developer).toHaveProperty("level_id");
     expect(developer?.age).toEqual(21);
   });
 });

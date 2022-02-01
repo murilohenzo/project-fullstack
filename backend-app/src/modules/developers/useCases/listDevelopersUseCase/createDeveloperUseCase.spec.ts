@@ -18,10 +18,10 @@ describe("ListDevelopersUseCase", () => {
     );
 
     await developerService.execute({
-      level: "JUNIOR",
+      level_id: 1,
       name: "John Doe",
       sex: "MALE",
-      birthDate: new Date(),
+      birth_date: new Date(),
       age: 21,
       hobby: "Assistir anime",
     });
@@ -31,7 +31,6 @@ describe("ListDevelopersUseCase", () => {
       developersRepositoryInMemory
     );
     const developers = await developerService.execute();
-    expect(developers?.[0]).toHaveProperty("level");
     expect(developers).toHaveLength(1);
   });
 });

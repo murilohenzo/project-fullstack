@@ -18,10 +18,10 @@ describe("GetDeveloperUseCase", () => {
     );
 
     await developerService.execute({
-      level: "JUNIOR",
+      level_id: 1,
       name: "John Doe",
       sex: "MALE",
-      birthDate: new Date(),
+      birth_date: new Date(),
       age: 21,
       hobby: "Assistir anime",
     });
@@ -31,8 +31,7 @@ describe("GetDeveloperUseCase", () => {
       developersRepositoryInMemory
     );
     const developers = await developerService.execute(1);
-    expect(developers).toHaveProperty("level");
-    expect(developers?.id).toEqual(1);
+    expect(developers).toHaveProperty("level_id");
   });
 });
 

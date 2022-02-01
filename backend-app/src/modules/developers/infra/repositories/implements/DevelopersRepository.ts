@@ -10,7 +10,9 @@ export class DevelopersRepository implements InterfaceDevelopersRepository {
     this.ormRepository = getRepository(Developer);
   }
   async findAll(): Promise<Developer[] | undefined> {
-    const developers = await this.ormRepository.find();
+    const developers = await this.ormRepository.query(
+      "select d.id, d.name, d.sex, d.age, d.hobby, d.birth_date, d.level_id, l.level from developers d inner join levels l on d.level_id = l.id;"
+    );
     return developers;
   }
 
@@ -20,13 +22,13 @@ export class DevelopersRepository implements InterfaceDevelopersRepository {
   }
 
   async create(
-    developer: InterfaceCreateDeveloperDTO
+    _developer: InterfaceCreateDeveloperDTO
   ): Promise<Developer | undefined> {
-    const developerObj = this.ormRepository.create(developer);
+    const developer = this.ormRepository.create(_developer);
 
-    await this.ormRepository.save(developerObj);
+    await this.ormRepository.save(developer);
 
-    return developerObj;
+    return developer;
   }
 
   async update(

@@ -1,8 +1,8 @@
 export interface InterfaceCreateDeveloperDTO {
-  level: string;
+  level_id: number;
   name: string;
   sex: string;
-  birthDate: Date;
+  birth_date: Date;
   age: number;
   hobby: string;
 }

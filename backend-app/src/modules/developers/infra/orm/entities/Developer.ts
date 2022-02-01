@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+} from "typeorm";
+import { Level } from "../../../../levels/infra/orm/entities/Level";
 
 @Entity("developers")
 export class Developer {
@@ -6,7 +13,11 @@ export class Developer {
   id: number;
 
   @Column()
-  level: string;
+  level_id: number;
+
+  @ManyToOne(() => Level)
+  @JoinColumn({ name: "level_id", referencedColumnName: "id" })
+  level: Level;
 
   @Column({ length: 500 })
   name: string;
@@ -15,7 +26,7 @@ export class Developer {
   sex: string;
 
   @Column("date")
-  birthDate: Date;
+  birth_date: Date;
 
   @Column()
   age: number;

@@ -36,9 +36,9 @@ export class DevelopersRepositoryInMemory
 
     if (developer !== undefined) {
       developer.age = _developer.age || developer.age;
-      developer.birthDate = _developer.birthDate || developer.birthDate;
+      developer.birth_date = _developer.birth_date || developer.birth_date;
       developer.hobby = _developer.hobby || developer.hobby;
-      developer.level = _developer.level || developer.level;
+      developer.level_id = _developer.level_id || developer.level_id;
       developer.name = _developer.name || developer.name;
       developer.sex = _developer.sex || developer.sex;
 

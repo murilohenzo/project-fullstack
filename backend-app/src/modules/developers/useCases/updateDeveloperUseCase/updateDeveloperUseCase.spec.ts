@@ -18,10 +18,10 @@ describe("UpdateDeveloperUseCase", () => {
     );
 
     await developerService.execute({
-      level: "JUNIOR",
+      level_id: 1,
       name: "John Doe",
       sex: "MALE",
-      birthDate: new Date(),
+      birth_date: new Date(),
       age: 21,
       hobby: "Assistir anime",
     });
@@ -31,14 +31,14 @@ describe("UpdateDeveloperUseCase", () => {
       developersRepositoryInMemory
     );
     const developer = await developerService.execute(1, {
-      level: "PLENO",
+      level_id: 1,
       name: "John Doe",
       sex: "MALE",
-      birthDate: new Date(),
+      birth_date: new Date(),
       age: 22,
       hobby: "Assistir series",
     });
-    expect(developer).toHaveProperty("level");
+    expect(developer).toHaveProperty("level_id");
     expect(developer?.age).toEqual(22);
   });
 });
@@ -56,10 +56,10 @@ describe("UpdateDeveloperUseCaseHandleException", () => {
         developersRepositoryInMemory
       );
       await developerService.execute(1, {
-        level: "",
+        level_id: 1,
         name: "",
         sex: "",
-        birthDate: new Date(),
+        birth_date: new Date(),
         age: 0,
         hobby: "",
       });
