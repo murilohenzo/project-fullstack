@@ -2,12 +2,12 @@
 import { InterfaceDevelopersRepository } from "../../infra/repositories/IDevelopersRepository";
 import { DevelopersRepositoryInMemory } from "../../infra/repositories/DevelopersRepositoryInMemory";
 import { CreateDeveloperUseCase } from "../createDeveloperUseCase";
-import { UpdateDeveloperUseCase } from "./index";
+import { GetDeveloperUseCase } from "./index";
 
 import { AppError } from "../../../../shared/errors/AppError";
 
 let developersRepositoryInMemory: InterfaceDevelopersRepository;
-describe("UpdateDeveloperUseCase", () => {
+describe("GetDeveloperUseCase", () => {
   beforeAll(() => {
     developersRepositoryInMemory = new DevelopersRepositoryInMemory();
   });
@@ -26,43 +26,29 @@ describe("UpdateDeveloperUseCase", () => {
       hobby: "Assistir anime",
     });
   });
-  it("should be able to update developer", async () => {
-    const developerService = new UpdateDeveloperUseCase(
+  it("should be able to get developer", async () => {
+    const developerService = new GetDeveloperUseCase(
       developersRepositoryInMemory
     );
-    const developer = await developerService.execute(1, {
-      level: "PLENO",
-      name: "John Doe",
-      sex: "MALE",
-      birthDate: new Date(),
-      age: 22,
-      hobby: "Assistir series",
-    });
-    expect(developer).toHaveProperty("level");
-    expect(developer?.age).toEqual(22);
+    const developers = await developerService.execute(1);
+    expect(developers).toHaveProperty("level");
+    expect(developers?.id).toEqual(1);
   });
 });
 
-describe("UpdateDeveloperUseCaseHandleException", () => {
+describe("GetDeveloperUseCaseHandleException", () => {
   beforeAll(() => {
     developersRepositoryInMemory = new DevelopersRepositoryInMemory();
   });
 
-  it("should be not able to list developers", async () => {
+  it("should be not able to get developer", async () => {
     expect.assertions(1);
 
     try {
-      const developerService = new UpdateDeveloperUseCase(
+      const listDevelopers = new GetDeveloperUseCase(
         developersRepositoryInMemory
       );
-      await developerService.execute(1, {
-        level: "",
-        name: "",
-        sex: "",
-        birthDate: new Date(),
-        age: 0,
-        hobby: "",
-      });
+      await listDevelopers.execute(10);
     } catch (error) {
       expect(error).toBeInstanceOf(AppError);
     }

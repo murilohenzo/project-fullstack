@@ -13,11 +13,11 @@ describe("ListDevelopersUseCase", () => {
   });
 
   beforeEach(async () => {
-    const createDeveloper = new CreateDeveloperUseCase(
+    const developerService = new CreateDeveloperUseCase(
       developersRepositoryInMemory
     );
 
-    await createDeveloper.execute({
+    await developerService.execute({
       level: "JUNIOR",
       name: "John Doe",
       sex: "MALE",
@@ -27,10 +27,10 @@ describe("ListDevelopersUseCase", () => {
     });
   });
   it("should be able to list developers", async () => {
-    const listDevelopers = new ListDevelopersUseCase(
+    const developerService = new ListDevelopersUseCase(
       developersRepositoryInMemory
     );
-    const developers = await listDevelopers.execute();
+    const developers = await developerService.execute();
     expect(developers?.[0]).toHaveProperty("level");
     expect(developers).toHaveLength(1);
   });
@@ -45,10 +45,10 @@ describe("ListDevelopersUseCaseHandleException", () => {
     expect.assertions(1);
 
     try {
-      const listDevelopers = new ListDevelopersUseCase(
+      const developerService = new ListDevelopersUseCase(
         developersRepositoryInMemory
       );
-      await listDevelopers.execute();
+      await developerService.execute();
     } catch (error) {
       expect(error).toBeInstanceOf(AppError);
     }
