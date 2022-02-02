@@ -3,6 +3,8 @@ import { Level } from "../orm/entities/Level";
 import { InterfaceLevelCount } from "../orm/entities/LevelCount";
 import { InterfaceLevelsRepository } from "./ILevelsRepository";
 
+import { developersMock } from "./mocks/developersMock";
+
 export class LevelsRepositoryInMemory implements InterfaceLevelsRepository {
   private levels: Level[] = [];
 
@@ -34,10 +36,26 @@ export class LevelsRepositoryInMemory implements InterfaceLevelsRepository {
   > {
     throw new Error("Method not implemented.");
   }
-  findByIdLevelsAndCountDevelopersAssociates(
+  async findByIdLevelsAndCountDevelopersAssociates(
     id: number
-  ): Promise<InterfaceLevelCount | undefined> {
-    throw new Error("Method not implemented.");
+  ): Promise<InterfaceLevelCount[] | undefined> {
+    const level: Level = {
+      id: 1,
+      level: "JUNIOR",
+    };
+
+    const count_levels = developersMock.reduce(
+      (nextValue, currentValue) =>
+        currentValue.level_id === id ? nextValue + currentValue.level_id : 0,
+      0
+    );
+
+    const levels: InterfaceLevelCount = {
+      count_levels: count_levels.toString(),
+      id,
+      level: level.level,
+    };
+    return [levels];
   }
   async update(
     id: number,

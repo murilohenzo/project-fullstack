@@ -23,4 +23,9 @@ levelsRouter.put("/:id", (request: Request, response: Response) => {
   return developerController.update(request, response);
 });
 
+levelsRouter.delete("/:id", (request: Request, response: Response) => {
+  const developerController = new LevelController();
+  return developerController.delete(request, response);
+});
+
 export { levelsRouter };

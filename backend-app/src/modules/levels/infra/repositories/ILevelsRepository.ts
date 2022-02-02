@@ -12,7 +12,7 @@ export interface InterfaceLevelsRepository {
   >;
   findByIdLevelsAndCountDevelopersAssociates(
     id: number
-  ): Promise<InterfaceLevelCount | undefined>;
+  ): Promise<InterfaceLevelCount[] | undefined>;
   update(
     id: number,
     level: InterfaceCreateLevelDTO
