@@ -7,6 +7,7 @@ import { InterfaceCreateLevelDTO } from "../../dtos/ICreateLevelDTO";
 import { CreateLevelUseCase } from "../../useCases/createLevelUseCase";
 import { ListLevelsUseCase } from "../../useCases/listLevelsUseCase";
 import { GetLevelUseCase } from "../../useCases/getLevelUseCase";
+import { UpdateLevelUseCase } from "../../useCases/updateLevelUseCase";
 
 export class LevelController {
   async create(
@@ -60,6 +61,29 @@ export class LevelController {
 
       const levelService = container.resolve(GetLevelUseCase);
       const levels = await levelService.execute(parseInt(id));
+
+      return response.status(StatusCodes.OK).json(levels);
+    } catch (error: any) {
+      if (error.statusCode) {
+        return response
+          .status(error.statusCode)
+          .json({ message: error.message });
+      }
+      return response
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: error.message });
+    }
+  }
+  async update(
+    request: Request,
+    response: Response
+  ): Promise<Response | undefined> {
+    try {
+      const { id } = request.params;
+      const payload: InterfaceCreateLevelDTO = request.body;
+
+      const levelService = container.resolve(UpdateLevelUseCase);
+      const levels = await levelService.execute(parseInt(id), payload);
 
       return response.status(StatusCodes.OK).json(levels);
     } catch (error: any) {
