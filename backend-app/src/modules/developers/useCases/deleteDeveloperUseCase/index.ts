@@ -14,13 +14,12 @@ export class DeleteDeveloperUseCase {
 
   async execute(id: number): Promise<void> {
     const developer = await this.developersRepository.findById(id);
-
     if (!developer)
       throw new AppError(
         "Nao foi possivel encontrar o desenvolvedor",
         StatusCodes.NOT_FOUND
       );
 
-    await this.developersRepository.delete(developer.id);
+    await this.developersRepository.delete(id);
   }
 }

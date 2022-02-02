@@ -5,6 +5,6 @@ export class Level {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @Column({ length: "50" })
+  @Column({ length: "20", unique: true })
   level: string;
 }

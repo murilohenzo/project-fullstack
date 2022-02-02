@@ -24,6 +24,13 @@ export class LevelsRepository implements InterfaceLevelsRepository {
     return level;
   }
 
+  async findByName(name: string): Promise<Level | undefined> {
+    const level = await this.ormRepository.findOne({
+      where: { level: name },
+    });
+    return level;
+  }
+
   async findAllLevelsAndCountDevelopersAssociates(): Promise<
     InterfaceLevelCount[] | undefined
   > {

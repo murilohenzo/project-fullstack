@@ -103,9 +103,8 @@ export class DeveloperController {
   ): Promise<Response | undefined> {
     try {
       const { id } = request.params;
-
       const developerService = container.resolve(DeleteDeveloperUseCase);
-      const developers = await developerService.execute(parseInt(id));
+      await developerService.execute(parseInt(id));
 
       return response
         .status(StatusCodes.OK)
