@@ -40,9 +40,9 @@ export class DeveloperController {
 
       return response.status(StatusCodes.OK).json(developers);
     } catch (error: any) {
-      if (error.Statuscode) {
+      if (error.statusCode) {
         return response
-          .status(error.Statuscode)
+          .status(error.statusCode)
           .json({ developers: [], message: error.message });
       }
       return response
@@ -63,9 +63,9 @@ export class DeveloperController {
 
       return response.status(StatusCodes.OK).json(developers);
     } catch (error: any) {
-      if (error.Statuscode) {
+      if (error.statusCode) {
         return response
-          .status(error.Statuscode)
+          .status(error.statusCode)
           .json({ developer: {}, message: error.message });
       }
       return response
@@ -86,9 +86,9 @@ export class DeveloperController {
 
       return response.status(StatusCodes.CREATED).json(developer);
     } catch (error: any) {
-      if (error.Statuscode) {
+      if (error.statusCode) {
         return response
-          .status(error.Statuscode)
+          .status(error.statusCode)
           .json({ developer: {}, message: error.message });
       }
       return response
@@ -110,9 +110,9 @@ export class DeveloperController {
         .status(StatusCodes.OK)
         .json({ message: "Desenvolvedor deletado com sucesso." });
     } catch (error: any) {
-      if (error.Statuscode) {
+      if (error.statusCode) {
         return response
-          .status(error.Statuscode)
+          .status(error.statusCode)
           .json({ message: error.message });
       }
       return response
@@ -134,9 +134,9 @@ export class DeveloperController {
 
       return response.status(StatusCodes.OK).json(developers);
     } catch (error: any) {
-      if (error.Statuscode) {
+      if (error.statusCode) {
         return response
-          .status(error.Statuscode)
+          .status(error.statusCode)
           .json({ developer: {}, message: error.message });
       }
       return response
@@ -158,9 +158,9 @@ export class DeveloperController {
 
       return response.status(StatusCodes.OK).json(developers);
     } catch (error: any) {
-      if (error.Statuscode) {
+      if (error.statusCode) {
         return response
-          .status(error.Statuscode)
+          .status(error.statusCode)
           .json({ developer: {}, message: error.message });
       }
       return response

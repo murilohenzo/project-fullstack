@@ -13,4 +13,9 @@ levelsRouter.get("", (request: Request, response: Response) => {
   return developerController.findAll(request, response);
 });
 
+levelsRouter.get("/:id", (request: Request, response: Response) => {
+  const developerController = new LevelController();
+  return developerController.findById(request, response);
+});
+
 export { levelsRouter };
