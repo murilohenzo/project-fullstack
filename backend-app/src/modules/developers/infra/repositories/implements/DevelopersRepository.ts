@@ -3,6 +3,8 @@ import { InterfaceDevelopersRepository } from "../IDevelopersRepository";
 import { Developer } from "../../orm/entities/Developer";
 import { InterfaceCreateDeveloperDTO } from "../../../dtos/ICreateDeveloperDTO";
 
+import { Queries } from "./queries";
+
 export class DevelopersRepository implements InterfaceDevelopersRepository {
   private ormRepository: Repository<Developer>;
 
@@ -11,13 +13,15 @@ export class DevelopersRepository implements InterfaceDevelopersRepository {
   }
   async findAll(): Promise<Developer[] | undefined> {
     const developers = await this.ormRepository.query(
-      "select d.id, d.name, d.sex, d.age, d.hobby, d.birth_date, d.level_id, l.level from developers d inner join levels l on d.level_id = l.id;"
+      Queries.findAllDevelopers()
     );
     return developers;
   }
 
   async findById(id: number): Promise<Developer | undefined> {
-    const developer = await this.ormRepository.findOne(id);
+    const developer = await this.ormRepository.query(
+      Queries.findByIdDevelopers(id)
+    );
     return developer;
   }
 

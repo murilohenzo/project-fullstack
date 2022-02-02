@@ -3,7 +3,7 @@
 
 ### Casos de Usos de Nivel
 - [] Listar níveis existentes
-- [] Cadastrar um nível
+- [x] Cadastrar um nível
 - [] Editar um nível
 - [] Remover um nível
 - [] Impedir que um nível seja removido quando houver um (ou mais) desenvolvedor(es) associado a este
