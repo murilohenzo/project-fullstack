@@ -25,6 +25,10 @@ export class LevelsRepositoryInMemory implements InterfaceLevelsRepository {
     const level = this.levels.find((level) => level.id === id);
     return level;
   }
+  async findByName(name: string): Promise<Level | undefined> {
+    const level = this.levels.find(({ level }) => level === name);
+    return level;
+  }
   findAllLevelsAndCountDevelopersAssociates(): Promise<
     InterfaceLevelCount[] | undefined
   > {

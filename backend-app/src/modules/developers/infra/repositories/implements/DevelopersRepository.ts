@@ -22,7 +22,8 @@ export class DevelopersRepository implements InterfaceDevelopersRepository {
     const developer = await this.ormRepository.query(
       Queries.findByIdDevelopers(id)
     );
-    return developer;
+    // @ts-ignore
+    return developer[0];
   }
 
   async create(

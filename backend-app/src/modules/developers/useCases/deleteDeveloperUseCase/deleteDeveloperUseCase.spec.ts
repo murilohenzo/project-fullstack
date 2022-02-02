@@ -1,22 +1,34 @@
 /* eslint-disable import/no-unresolved */
 import { InterfaceDevelopersRepository } from "../../infra/repositories/IDevelopersRepository";
 import { DevelopersRepositoryInMemory } from "../../infra/repositories/DevelopersRepositoryInMemory";
+
+import { LevelsRepositoryInMemory } from "../../../levels/infra/repositories/LevelsRepositoryInMemory";
+import { InterfaceLevelsRepository } from "../../../levels/infra/repositories/ILevelsRepository";
+
 import { CreateDeveloperUseCase } from "../createDeveloperUseCase";
+import { CreateLevelUseCase } from "../../../levels/useCases/createLevelUseCase";
 import { DeleteDeveloperUseCase } from "./index";
 import { ListDevelopersUseCase } from "../listDevelopersUseCase";
 
 import { AppError } from "../../../../shared/errors/AppError";
 
+let levelsRepositoryInMemory: InterfaceLevelsRepository;
 let developersRepositoryInMemory: InterfaceDevelopersRepository;
 describe("DeleteDeveloperUseCase", () => {
   beforeAll(() => {
     developersRepositoryInMemory = new DevelopersRepositoryInMemory();
+    levelsRepositoryInMemory = new LevelsRepositoryInMemory();
   });
 
   beforeEach(async () => {
     const developerService = new CreateDeveloperUseCase(
-      developersRepositoryInMemory
+      developersRepositoryInMemory,
+      levelsRepositoryInMemory
     );
+
+    const levelService = new CreateLevelUseCase(levelsRepositoryInMemory);
+
+    await levelService.execute({ level: "JUNIOR" });
 
     await developerService.execute({
       level_id: 1,

@@ -6,6 +6,7 @@ export interface InterfaceLevelsRepository {
   create(level: InterfaceCreateLevelDTO): Promise<Level | undefined>;
   findAll(): Promise<Level[] | undefined>;
   findById(id: number): Promise<Level | undefined>;
+  findByName(name: string): Promise<Level | undefined>;
   findAllLevelsAndCountDevelopersAssociates(): Promise<
     InterfaceLevelCount[] | undefined
   >;

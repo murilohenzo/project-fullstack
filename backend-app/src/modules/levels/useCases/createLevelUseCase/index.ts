@@ -1,5 +1,4 @@
 /* eslint-disable import/no-unresolved */
-import { StatusCodes } from "http-status-codes";
 import { Level } from "modules/levels/infra/orm/entities/Level";
 import { InterfaceLevelsRepository } from "modules/levels/infra/repositories/ILevelsRepository";
 import { injectable, inject } from "tsyringe";
@@ -14,8 +13,14 @@ export class CreateLevelUseCase {
     private readonly levelsRepository: InterfaceLevelsRepository
   ) {}
 
-  async execute(level: InterfaceCreateLevelDTO): Promise<Level | undefined> {
-    if (level.level) return this.levelsRepository.create(level);
-    throw new AppError("O campo level eh obrigatorio");
+  async execute({
+    level,
+  }: InterfaceCreateLevelDTO): Promise<Level | undefined> {
+    const levelFound = await this.levelsRepository.findByName(level);
+
+    if (levelFound) throw new AppError("O nivel ja existe na base de dados");
+
+    if (level) return this.levelsRepository.create({ level });
+    throw new AppError("O campo nivel eh obrigatorio");
   }
 }
