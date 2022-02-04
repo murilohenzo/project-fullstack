@@ -20,7 +20,7 @@ export class PaginationDevelopersUseCase {
 
     throw new AppError(
       "Nao existe densenvolvedores na base para fazer a paginacao",
-      StatusCodes.NO_CONTENT
+      StatusCodes.NOT_FOUND
     );
   }
 }

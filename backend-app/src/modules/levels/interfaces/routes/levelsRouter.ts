@@ -28,4 +28,9 @@ levelsRouter.delete("/:id", (request: Request, response: Response) => {
   return developerController.delete(request, response);
 });
 
+levelsRouter.post("/pagination", (request: Request, response: Response) => {
+  const developerController = new LevelController();
+  return developerController.pagination(request, response);
+});
+
 export { levelsRouter };

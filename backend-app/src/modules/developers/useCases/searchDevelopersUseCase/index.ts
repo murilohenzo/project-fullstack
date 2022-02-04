@@ -22,8 +22,8 @@ export class SearchDeveloperUseCase {
       }
     }
     throw new AppError(
-      `Nao existe densenvolvedores na base com esse nome ${name}`,
-      StatusCodes.NO_CONTENT
+      "Nao existe densenvolvedores na base de dados",
+      StatusCodes.NOT_FOUND
     );
   }
 }

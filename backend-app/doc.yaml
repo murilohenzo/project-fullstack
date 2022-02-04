@@ -1,0 +1,414 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: FULLSTACK
+  description: ''
+  contact: {}
+host: localhost:3333
+basePath: /
+securityDefinitions: {}
+schemes:
+- http
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /levels:
+    get:
+      description: ''
+      summary: LIST LEVELS
+      tags:
+      - LEVELS
+      operationId: LISTLEVELS
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            default: ''
+          headers: {}
+      security: []
+    post:
+      description: ''
+      summary: CREATE LEVEL
+      tags:
+      - LEVELS
+      operationId: CREATELEVEL
+      deprecated: false
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - name: Body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/CREATELEVELRequest'
+      - name: Content-Type
+        in: header
+        required: false
+        enum:
+        - application/json
+        type: string
+        description: ''
+      responses:
+        '200':
+          description: ''
+          schema:
+            default: ''
+          headers: {}
+      security: []
+  /levels/10:
+    get:
+      description: ''
+      summary: GET LEVEL
+      tags:
+      - LEVELS
+      operationId: GETLEVEL
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            default: ''
+          headers: {}
+      security: []
+  /levels/5:
+    put:
+      description: ''
+      summary: UPDATE LEVEL
+      tags:
+      - LEVELS
+      operationId: UPDATELEVEL
+      deprecated: false
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - name: Body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/UPDATELEVELRequest'
+      - name: Content-Type
+        in: header
+        required: false
+        enum:
+        - application/json
+        type: string
+        description: ''
+      responses:
+        '200':
+          description: ''
+          schema:
+            default: ''
+          headers: {}
+      security: []
+  /levels/3:
+    delete:
+      description: ''
+      summary: DELETE LEVEL
+      tags:
+      - LEVELS
+      operationId: DELETELEVEL
+      deprecated: false
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - name: Content-Type
+        in: header
+        required: false
+        enum:
+        - application/json
+        type: string
+        description: ''
+      responses:
+        '200':
+          description: ''
+          schema:
+            default: ''
+          headers: {}
+      security: []
+  /developers/search:
+    post:
+      description: ''
+      summary: SEARCH DEVELOPERS
+      tags:
+      - DEVELOPERS
+      operationId: SEARCHDEVELOPERS
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: name
+        in: query
+        required: true
+        type: string
+        description: ''
+      responses:
+        '200':
+          description: ''
+          schema:
+            default: ''
+          headers: {}
+      security: []
+  /developers/pagination:
+    post:
+      description: ''
+      summary: PAGINATION DEVELOPERS
+      tags:
+      - DEVELOPERS
+      operationId: PAGINATIONDEVELOPERS
+      deprecated: false
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - name: Body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/PAGINATIONDEVELOPERSRequest'
+      - name: Content-Type
+        in: header
+        required: false
+        enum:
+        - application/json
+        type: string
+        description: ''
+      responses:
+        '200':
+          description: ''
+          schema:
+            default: ''
+          headers: {}
+      security: []
+  /developers/7:
+    delete:
+      description: ''
+      summary: REMOVE DEVELOPER
+      tags:
+      - DEVELOPERS
+      operationId: REMOVEDEVELOPER
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            default: ''
+          headers: {}
+      security: []
+  /developers/:
+    get:
+      description: ''
+      summary: LIST DEVELOPERS
+      tags:
+      - DEVELOPERS
+      operationId: LISTDEVELOPERS
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            default: ''
+          headers: {}
+      security: []
+  /developers/2:
+    get:
+      description: ''
+      summary: GET DEVELOPER
+      tags:
+      - DEVELOPERS
+      operationId: GETDEVELOPER
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            default: ''
+          headers: {}
+      security: []
+  /developers/1:
+    put:
+      description: ''
+      summary: UPDATE DEVELOPER
+      tags:
+      - DEVELOPERS
+      operationId: UPDATEDEVELOPER
+      deprecated: false
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - name: Body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/UPDATEDEVELOPERRequest'
+      - name: Content-Type
+        in: header
+        required: false
+        enum:
+        - application/json
+        type: string
+        description: ''
+      responses:
+        '200':
+          description: ''
+          schema:
+            default: ''
+          headers: {}
+      security: []
+  /developers:
+    post:
+      description: ''
+      summary: CREATE DEVELOPER
+      tags:
+      - DEVELOPERS
+      operationId: CREATEDEVELOPER
+      deprecated: false
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - name: Body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/CREATEDEVELOPERRequest'
+      - name: Content-Type
+        in: header
+        required: false
+        enum:
+        - application/json
+        type: string
+        description: ''
+      responses:
+        '200':
+          description: ''
+          schema:
+            default: ''
+          headers: {}
+      security: []
+definitions:
+  CREATELEVELRequest:
+    title: CREATELEVELRequest
+    example:
+      level: PLENO A
+    type: object
+    properties:
+      level:
+        type: string
+    required:
+    - level
+  UPDATELEVELRequest:
+    title: UPDATELEVELRequest
+    example:
+      level: PLENO
+    type: object
+    properties:
+      level:
+        type: string
+    required:
+    - level
+  PAGINATIONDEVELOPERSRequest:
+    title: PAGINATIONDEVELOPERSRequest
+    example:
+      take: 4
+      page: 1
+    type: object
+    properties:
+      take:
+        type: integer
+        format: int32
+      page:
+        type: integer
+        format: int32
+    required:
+    - take
+    - page
+  UPDATEDEVELOPERRequest:
+    title: UPDATEDEVELOPERRequest
+    example:
+      level_id: 2
+      age: 21
+      hobby: Assistir animes
+    type: object
+    properties:
+      level_id:
+        type: integer
+        format: int32
+      age:
+        type: integer
+        format: int32
+      hobby:
+        type: string
+    required:
+    - level_id
+    - age
+    - hobby
+  CREATEDEVELOPERRequest:
+    title: CREATEDEVELOPERRequest
+    example:
+      level_id: 2
+      name: Murilo Henzo
+      sex: Male
+      birth_date: "{% now 'iso-8601', '' %}"
+      age: 21
+      hobby: Assistir series
+    type: object
+    properties:
+      level_id:
+        type: integer
+        format: int32
+      name:
+        type: string
+      sex:
+        type: string
+      birth_date:
+        type: string
+      age:
+        type: integer
+        format: int32
+      hobby:
+        type: string
+    required:
+    - level_id
+    - name
+    - sex
+    - birth_date
+    - age
+    - hobby
+tags:
+- name: LEVELS
+  description: ''
+- name: DEVELOPERS
+  description: ''

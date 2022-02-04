@@ -9,6 +9,7 @@ import { ListLevelsUseCase } from "../../useCases/listLevelsUseCase";
 import { GetLevelUseCase } from "../../useCases/getLevelUseCase";
 import { UpdateLevelUseCase } from "../../useCases/updateLevelUseCase";
 import { DeleteLevelUseCase } from "../../useCases/deleteLevelUseCase";
+import { PaginationLevelsUseCase } from "../../useCases/paginationLevelsUseCase";
 
 export class LevelController {
   async create(
@@ -109,8 +110,31 @@ export class LevelController {
       await levelService.execute(parseInt(id));
 
       return response
-        .status(StatusCodes.OK)
+        .status(StatusCodes.NO_CONTENT)
         .json({ message: " O nivel foi deletado com sucesso" });
+    } catch (error: any) {
+      if (error.statusCode) {
+        return response
+          .status(error.statusCode)
+          .json({ message: error.message });
+      }
+      return response
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: error.message });
+    }
+  }
+
+  async pagination(
+    request: Request,
+    response: Response
+  ): Promise<Response | undefined> {
+    try {
+      const { take, page } = request.body;
+
+      const levelService = container.resolve(PaginationLevelsUseCase);
+      const levels = await levelService.execute(take, page);
+
+      return response.status(StatusCodes.OK).json(levels);
     } catch (error: any) {
       if (error.statusCode) {
         return response
