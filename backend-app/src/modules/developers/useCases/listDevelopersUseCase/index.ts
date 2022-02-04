@@ -19,8 +19,8 @@ export class ListDevelopersUseCase {
     if (developers && developers.length > 0) return developers;
 
     throw new AppError(
-      "Nao existe densenvolvedores na base",
-      StatusCodes.NO_CONTENT
+      "Nao existe densenvolvedores na base dados",
+      StatusCodes.NOT_FOUND
     );
   }
 }

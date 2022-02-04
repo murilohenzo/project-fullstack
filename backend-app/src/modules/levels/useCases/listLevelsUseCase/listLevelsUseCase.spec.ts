@@ -1,6 +1,5 @@
 import { AppError } from "../../../../shared/errors/AppError";
 import { LevelsRepositoryInMemory } from "../../infra/repositories/LevelsRepositoryInMemory";
-import { CreateLevelUseCase } from "../createLevelUseCase";
 import { ListLevelsUseCase } from "./index";
 
 let levelsRepositoryInMemory: LevelsRepositoryInMemory;
@@ -10,21 +9,12 @@ describe("ListLevelsUseCase", () => {
     levelsRepositoryInMemory = new LevelsRepositoryInMemory();
   });
 
-  beforeEach(async () => {
-    const levelService = new CreateLevelUseCase(levelsRepositoryInMemory);
-
-    await levelService.execute({ level: "JUNIOR" });
-    await levelService.execute({ level: "PLENO" });
-    await levelService.execute({ level: "SENIOR" });
-    await levelService.execute({ level: "MASTER" });
-  });
-
   it("should be able to list levels", async () => {
     const levelService = new ListLevelsUseCase(levelsRepositoryInMemory);
 
     const levels = await levelService.execute();
 
-    expect(levels?.length).toBeGreaterThan(3);
+    expect(levels?.length).toEqual(1);
   });
 });
 
@@ -35,6 +25,7 @@ describe("ListLevelsUseCaseHandleException", () => {
 
   it("should not be able to list levels", async () => {
     const levelService = new ListLevelsUseCase(levelsRepositoryInMemory);
+    levelsRepositoryInMemory.clear();
 
     expect.assertions(1);
     try {

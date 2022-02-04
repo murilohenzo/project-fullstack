@@ -107,7 +107,7 @@ export class DeveloperController {
       await developerService.execute(parseInt(id));
 
       return response
-        .status(StatusCodes.OK)
+        .status(StatusCodes.NO_CONTENT)
         .json({ message: "Desenvolvedor deletado com sucesso." });
     } catch (error: any) {
       if (error.statusCode) {

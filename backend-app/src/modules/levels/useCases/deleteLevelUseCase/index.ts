@@ -2,7 +2,6 @@
 import { injectable, inject } from "tsyringe";
 
 import { StatusCodes } from "http-status-codes";
-import { Level } from "../../infra/orm/entities/Level";
 import { InterfaceLevelsRepository } from "../../infra/repositories/ILevelsRepository";
 import { AppError } from "../../../../shared/errors/AppError";
 
@@ -22,15 +21,13 @@ export class DeleteLevelUseCase {
         StatusCodes.NOT_FOUND
       );
 
-    const existsLevel =
-      await this.levelsRepository.findByIdLevelsAndCountDevelopersAssociates(
-        id
-      );
+    const existsLevel = await this.levelsRepository.findByIdWithCountDevs(id);
 
     if (
       existsLevel &&
       existsLevel.length > 0 &&
-      parseInt(existsLevel[0].count_levels) > 0
+      // @ts-ignore
+      parseInt(existsLevel[0]?.count_devs) > 0
     )
       throw new AppError(
         "O nivel nao pode ser deletado, pois existe um ou mais desenvolvedores associados",

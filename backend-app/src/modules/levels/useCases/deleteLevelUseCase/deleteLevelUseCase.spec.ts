@@ -12,21 +12,17 @@ describe("DeleteLevelUseCase", () => {
     levelsRepositoryInMemory = new LevelsRepositoryInMemory();
   });
 
-  beforeEach(async () => {
-    const levelService = new CreateLevelUseCase(levelsRepositoryInMemory);
-
-    await levelService.execute({ level: "PLENO" });
-    await levelService.execute({ level: "SENIOR" });
-  });
-
   it("should be able to delete level", async () => {
-    const levelService = new DeleteLevelUseCase(levelsRepositoryInMemory);
-    await levelService.execute(2);
+    const createLevelService = new CreateLevelUseCase(levelsRepositoryInMemory);
+    await createLevelService.execute({ level: "PLENO" });
+
+    const deleteLevelService = new DeleteLevelUseCase(levelsRepositoryInMemory);
+    await deleteLevelService.execute(2);
 
     expect.assertions(1);
     try {
       const levelService = new GetLevelUseCase(levelsRepositoryInMemory);
-      await levelService.execute(2);
+      await levelService.execute(3);
     } catch (error) {
       expect(error).toBeInstanceOf(AppError);
     }
@@ -42,16 +38,13 @@ describe("DeleteLevelUseCaseHandleExceptions", () => {
     expect.assertions(1);
     try {
       const levelService = new DeleteLevelUseCase(levelsRepositoryInMemory);
-      await levelService.execute(2);
+      await levelService.execute(10);
     } catch (error) {
       expect(error).toBeInstanceOf(AppError);
     }
   });
 
   it("must not be able to delete the level that has more than one developer associate ", async () => {
-    const levelService = new CreateLevelUseCase(levelsRepositoryInMemory);
-
-    await levelService.execute({ level: "PLENO" });
     expect.assertions(1);
     try {
       const levelService = new DeleteLevelUseCase(levelsRepositoryInMemory);

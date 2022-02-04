@@ -6,7 +6,6 @@ import { LevelsRepositoryInMemory } from "../../../levels/infra/repositories/Lev
 import { InterfaceLevelsRepository } from "../../../levels/infra/repositories/ILevelsRepository";
 
 import { CreateDeveloperUseCase } from "./index";
-import { CreateLevelUseCase } from "../../../levels/useCases/createLevelUseCase";
 import { Developer } from "../../infra/orm/entities/Developer";
 
 let levelsRepositoryInMemory: InterfaceLevelsRepository;
@@ -15,14 +14,6 @@ describe("CreateDeveloperUseCase", () => {
   beforeAll(() => {
     levelsRepositoryInMemory = new LevelsRepositoryInMemory();
     developersRepositoryInMemory = new DevelopersRepositoryInMemory();
-  });
-
-  beforeEach(async () => {
-    const levelService = new CreateLevelUseCase(levelsRepositoryInMemory);
-
-    await levelService.execute({
-      level: "JUNIOR",
-    });
   });
 
   it("should be able to create developer", async () => {
@@ -52,12 +43,6 @@ describe("CreateDeveloperUseCaseHandleExceptions", () => {
   });
 
   it("shouldn't be able to create developer with level that doesn't exist", async () => {
-    const levelService = new CreateLevelUseCase(levelsRepositoryInMemory);
-
-    await levelService.execute({
-      level: "JUNIOR",
-    });
-
     const developerService = new CreateDeveloperUseCase(
       developersRepositoryInMemory,
       levelsRepositoryInMemory
@@ -67,7 +52,7 @@ describe("CreateDeveloperUseCaseHandleExceptions", () => {
 
     try {
       await developerService.execute({
-        level_id: 2,
+        level_id: 3,
         name: "John Doe",
         sex: "MALE",
         birth_date: new Date(),

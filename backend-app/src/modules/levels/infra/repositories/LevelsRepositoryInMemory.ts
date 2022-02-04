@@ -3,10 +3,17 @@ import { Level } from "../orm/entities/Level";
 import { InterfaceLevelCount } from "../orm/entities/LevelCount";
 import { InterfaceLevelsRepository } from "./ILevelsRepository";
 
-import { developersMock } from "./mocks/developersMock";
-
+interface InterfaceLevels extends Level {
+  count_devs?: string;
+}
 export class LevelsRepositoryInMemory implements InterfaceLevelsRepository {
-  private levels: Level[] = [];
+  private levels: InterfaceLevels[] = [
+    {
+      id: 1,
+      level: "ESPECIALISTA",
+      count_devs: "3",
+    },
+  ];
 
   async create(level: InterfaceCreateLevelDTO): Promise<Level | undefined> {
     const levelObj = new Level();
@@ -20,10 +27,10 @@ export class LevelsRepositoryInMemory implements InterfaceLevelsRepository {
     return levelObj;
   }
 
-  async findAll(): Promise<Level[] | undefined> {
+  async findAll(): Promise<InterfaceLevelCount[] | undefined> {
     return this.levels;
   }
-  async findById(id: number): Promise<Level | undefined> {
+  async findById(id: number): Promise<InterfaceLevelCount | undefined> {
     const level = this.levels.find((level) => level.id === id);
     return level;
   }
@@ -36,26 +43,11 @@ export class LevelsRepositoryInMemory implements InterfaceLevelsRepository {
   > {
     throw new Error("Method not implemented.");
   }
-  async findByIdLevelsAndCountDevelopersAssociates(
+  async findByIdWithCountDevs(
     id: number
   ): Promise<InterfaceLevelCount[] | undefined> {
-    const level: Level = {
-      id: 1,
-      level: "JUNIOR",
-    };
-
-    const count_levels = developersMock.reduce(
-      (nextValue, currentValue) =>
-        currentValue.level_id === id ? nextValue + currentValue.level_id : 0,
-      0
-    );
-
-    const levels: InterfaceLevelCount = {
-      count_levels: count_levels.toString(),
-      id,
-      level: level.level,
-    };
-    return [levels];
+    const level = this.levels.filter((level) => level.id === id);
+    return level;
   }
   async update(
     id: number,
@@ -80,5 +72,9 @@ export class LevelsRepositoryInMemory implements InterfaceLevelsRepository {
   async pagination(take: number, page: number): Promise<Level[] | undefined> {
     const levels = this.levels.slice((page - 1) * take, page * take);
     return levels;
+  }
+  async clear(): Promise<void> {
+    this.levels.pop();
+    this.levels.pop();
   }
 }

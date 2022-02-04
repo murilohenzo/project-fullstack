@@ -4,7 +4,6 @@ import { DevelopersRepositoryInMemory } from "../../infra/repositories/Developer
 
 import { LevelsRepositoryInMemory } from "../../../levels/infra/repositories/LevelsRepositoryInMemory";
 import { InterfaceLevelsRepository } from "../../../levels/infra/repositories/ILevelsRepository";
-import { CreateLevelUseCase } from "../../../levels/useCases/createLevelUseCase";
 
 import { CreateDeveloperUseCase } from "../createDeveloperUseCase";
 import { UpdateDeveloperUseCase } from "./index";
@@ -24,12 +23,6 @@ describe("UpdateDeveloperUseCase", () => {
       developersRepositoryInMemory,
       levelsRepositoryInMemory
     );
-
-    const levelService = new CreateLevelUseCase(levelsRepositoryInMemory);
-
-    await levelService.execute({
-      level: "JUNIOR",
-    });
 
     await developerService.execute({
       level_id: 1,
@@ -70,12 +63,6 @@ describe("UpdateDeveloperUseCaseHandleExceptions", () => {
       levelsRepositoryInMemory
     );
 
-    const levelService = new CreateLevelUseCase(levelsRepositoryInMemory);
-
-    await levelService.execute({
-      level: "JUNIOR",
-    });
-
     await developerService.execute({
       level_id: 1,
       name: "John Doe",
@@ -93,7 +80,7 @@ describe("UpdateDeveloperUseCaseHandleExceptions", () => {
         levelsRepositoryInMemory
       );
       await developerService.execute(1, {
-        level_id: 2,
+        level_id: 5,
         name: "",
         sex: "",
         birth_date: new Date(),

@@ -14,37 +14,30 @@ export class LevelsRepository implements InterfaceLevelsRepository {
     this.ormRepository = getRepository(Level);
   }
 
-  async findAll(): Promise<Level[] | undefined> {
-    const levels = await this.ormRepository.find();
-    return levels;
-  }
-
-  async findById(id: number): Promise<Level | undefined> {
-    const level = await this.ormRepository.findOne(id);
-    return level;
-  }
-
-  async findByName(name: string): Promise<Level | undefined> {
-    const level = await this.ormRepository.findOne({
-      where: { level: name },
-    });
-    return level;
-  }
-
-  async findAllLevelsAndCountDevelopersAssociates(): Promise<
-    InterfaceLevelCount[] | undefined
-  > {
+  async findAll(): Promise<InterfaceLevelCount[] | undefined> {
     const levels = await this.ormRepository.query(
       Queries.findAllLevelsAndCountDevelopersAssociates()
     );
     return levels;
   }
-  async findByIdLevelsAndCountDevelopersAssociates(
+
+  async findById(id: number): Promise<InterfaceLevelCount | undefined> {
+    const level = await this.ormRepository.findOne(id);
+    return level;
+  }
+
+  async findByIdWithCountDevs(
     id: number
-  ): Promise<InterfaceLevelCount | undefined> {
-    const level = await this.ormRepository.query(
+  ): Promise<InterfaceLevelCount[] | undefined> {
+    const level: InterfaceLevelCount = await this.ormRepository.query(
       Queries.findByIdLevelsAndCountDevelopersAssociates(id)
     );
+    return [level];
+  }
+  async findByName(name: string): Promise<Level | undefined> {
+    const level = await this.ormRepository.findOne({
+      where: { level: name },
+    });
     return level;
   }
 
@@ -79,11 +72,13 @@ export class LevelsRepository implements InterfaceLevelsRepository {
     return levels;
   }
 
-  async pagination(take: number, page: number): Promise<Level[] | undefined> {
-    const levels: Level[] = await this.ormRepository.find({
-      take,
-      skip: take * (page - 1),
-    });
+  async pagination(
+    take: number,
+    page: number
+  ): Promise<InterfaceLevelCount[] | undefined> {
+    const levels: InterfaceLevelCount[] = await this.ormRepository.query(
+      Queries.paginationLevelsAndCountDevelopersAssociates(take, page)
+    );
 
     return levels;
   }

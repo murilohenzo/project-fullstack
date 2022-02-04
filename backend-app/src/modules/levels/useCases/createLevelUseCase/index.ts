@@ -17,7 +17,6 @@ export class CreateLevelUseCase {
     level,
   }: InterfaceCreateLevelDTO): Promise<Level | undefined> {
     const levelFound = await this.levelsRepository.findByName(level);
-
     if (levelFound) throw new AppError("O nivel ja existe na base de dados");
 
     if (level) return this.levelsRepository.create({ level });

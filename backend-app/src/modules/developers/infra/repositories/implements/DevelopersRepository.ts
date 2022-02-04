@@ -12,16 +12,12 @@ export class DevelopersRepository implements InterfaceDevelopersRepository {
     this.ormRepository = getRepository(Developer);
   }
   async findAll(): Promise<Developer[] | undefined> {
-    const developers = await this.ormRepository.query(
-      Queries.findAllDevelopers()
-    );
+    const developers = await this.ormRepository.query(Queries.findAll());
     return developers;
   }
 
   async findById(id: number): Promise<Developer | undefined> {
-    const developer = await this.ormRepository.query(
-      Queries.findByIdDevelopers(id)
-    );
+    const developer = await this.ormRepository.query(Queries.findById(id));
     // @ts-ignore
     return developer[0];
   }
@@ -54,7 +50,7 @@ export class DevelopersRepository implements InterfaceDevelopersRepository {
 
   async search(name: string): Promise<Developer[] | undefined> {
     const developers: Developer[] = await this.ormRepository.query(
-      `select * from developers where developers.name ilike '${name}%'`
+      Queries.findByName(name)
     );
     return developers;
   }
@@ -63,10 +59,9 @@ export class DevelopersRepository implements InterfaceDevelopersRepository {
     take: number,
     page: number
   ): Promise<Developer[] | undefined> {
-    const developers: Developer[] = await this.ormRepository.find({
-      take,
-      skip: take * (page - 1),
-    });
+    const developers: Developer[] = await this.ormRepository.query(
+      Queries.pagination(take, page)
+    );
 
     return developers;
   }
