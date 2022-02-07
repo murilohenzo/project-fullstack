@@ -4,33 +4,38 @@ import { LevelController } from "../controllers/LevelController";
 const levelsRouter = Router();
 
 levelsRouter.post("", (request: Request, response: Response) => {
-  const developerController = new LevelController();
-  return developerController.create(request, response);
+  const levelController = new LevelController();
+  return levelController.create(request, response);
 });
 
 levelsRouter.get("", (request: Request, response: Response) => {
-  const developerController = new LevelController();
-  return developerController.findAll(request, response);
+  const levelController = new LevelController();
+  return levelController.findAll(request, response);
 });
 
 levelsRouter.get("/:id", (request: Request, response: Response) => {
-  const developerController = new LevelController();
-  return developerController.findById(request, response);
+  const levelController = new LevelController();
+  return levelController.findById(request, response);
 });
 
 levelsRouter.put("/:id", (request: Request, response: Response) => {
-  const developerController = new LevelController();
-  return developerController.update(request, response);
+  const levelController = new LevelController();
+  return levelController.update(request, response);
 });
 
 levelsRouter.delete("/:id", (request: Request, response: Response) => {
-  const developerController = new LevelController();
-  return developerController.delete(request, response);
+  const levelController = new LevelController();
+  return levelController.delete(request, response);
+});
+
+levelsRouter.post("/search", (request: Request, response: Response) => {
+  const levelController = new LevelController();
+  return levelController.pagination(request, response);
 });
 
 levelsRouter.post("/pagination", (request: Request, response: Response) => {
-  const developerController = new LevelController();
-  return developerController.pagination(request, response);
+  const levelController = new LevelController();
+  return levelController.pagination(request, response);
 });
 
 export { levelsRouter };

@@ -7,7 +7,7 @@ import { InterfaceDevelopersRepository } from "../../infra/repositories/IDevelop
 import { AppError } from "../../../../shared/errors/AppError";
 
 @injectable()
-export class SearchDeveloperUseCase {
+export class SearchDevelopersUseCase {
   constructor(
     @inject("DevelopersRepository")
     private readonly developersRepository: InterfaceDevelopersRepository
