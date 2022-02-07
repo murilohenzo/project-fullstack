@@ -27,7 +27,7 @@ export class DeleteLevelUseCase {
       existsLevel &&
       existsLevel.length > 0 &&
       // @ts-ignore
-      parseInt(existsLevel[0]?.count_devs) > 0
+      parseInt(existsLevel[0].count_devs) > 0
     )
       throw new AppError(
         "O nivel nao pode ser deletado, pois existe um ou mais desenvolvedores associados",

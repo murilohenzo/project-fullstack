@@ -7,13 +7,13 @@ import { InterfaceLevelsRepository } from "../../../levels/infra/repositories/IL
 import { CreateLevelUseCase } from "../../../levels/useCases/createLevelUseCase";
 
 import { CreateDeveloperUseCase } from "../createDeveloperUseCase";
-import { SearchDeveloperUseCase } from "./index";
+import { SearchDevelopersUseCase } from "./index";
 
 import { AppError } from "../../../../shared/errors/AppError";
 
 let levelsRepositoryInMemory: InterfaceLevelsRepository;
 let developersRepositoryInMemory: InterfaceDevelopersRepository;
-describe("SearchDeveloperUseCase", () => {
+describe("SearchDevelopersUseCase", () => {
   beforeAll(() => {
     levelsRepositoryInMemory = new LevelsRepositoryInMemory();
     developersRepositoryInMemory = new DevelopersRepositoryInMemory();
@@ -59,7 +59,7 @@ describe("SearchDeveloperUseCase", () => {
     });
   });
   it("should be able to search developers by name", async () => {
-    const developerService = new SearchDeveloperUseCase(
+    const developerService = new SearchDevelopersUseCase(
       developersRepositoryInMemory
     );
     const developers = await developerService.execute("John Doe");
@@ -67,7 +67,7 @@ describe("SearchDeveloperUseCase", () => {
   });
 });
 
-describe("SearchDeveloperUseCaseHandleException", () => {
+describe("SearchDevelopersUseCaseHandleException", () => {
   beforeAll(() => {
     developersRepositoryInMemory = new DevelopersRepositoryInMemory();
   });
@@ -76,7 +76,7 @@ describe("SearchDeveloperUseCaseHandleException", () => {
     expect.assertions(1);
 
     try {
-      const developerService = new SearchDeveloperUseCase(
+      const developerService = new SearchDevelopersUseCase(
         developersRepositoryInMemory
       );
       await developerService.execute({} as string);

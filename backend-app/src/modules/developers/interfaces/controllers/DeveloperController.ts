@@ -9,7 +9,7 @@ import { ListDevelopersUseCase } from "../../useCases/listDevelopersUseCase";
 import { UpdateDeveloperUseCase } from "../../useCases/updateDeveloperUseCase";
 import { GetDeveloperUseCase } from "../../useCases/getDeveloperUseCase";
 import { DeleteDeveloperUseCase } from "../../useCases/deleteDeveloperUseCase";
-import { SearchDeveloperUseCase } from "../../useCases/searchDevelopersUseCase";
+import { SearchDevelopersUseCase } from "../../useCases/searchDevelopersUseCase";
 import { PaginationDevelopersUseCase } from "../../useCases/paginationDevelopersUseCase";
 
 export class DeveloperController {
@@ -43,7 +43,7 @@ export class DeveloperController {
       if (error.statusCode) {
         return response
           .status(error.statusCode)
-          .json({ developers: [], message: error.message });
+          .json({ message: error.message });
       }
       return response
         .status(StatusCodes.BAD_REQUEST)
@@ -66,7 +66,7 @@ export class DeveloperController {
       if (error.statusCode) {
         return response
           .status(error.statusCode)
-          .json({ developer: {}, message: error.message });
+          .json({ message: error.message });
       }
       return response
         .status(StatusCodes.BAD_REQUEST)
@@ -89,7 +89,7 @@ export class DeveloperController {
       if (error.statusCode) {
         return response
           .status(error.statusCode)
-          .json({ developer: {}, message: error.message });
+          .json({ message: error.message });
       }
       return response
         .status(StatusCodes.BAD_REQUEST)
@@ -128,7 +128,7 @@ export class DeveloperController {
     try {
       const { name } = request.query;
 
-      const developerService = container.resolve(SearchDeveloperUseCase);
+      const developerService = container.resolve(SearchDevelopersUseCase);
       // @ts-ignore
       const developers = await developerService.execute(name);
 
@@ -137,7 +137,7 @@ export class DeveloperController {
       if (error.statusCode) {
         return response
           .status(error.statusCode)
-          .json({ developer: {}, message: error.message });
+          .json({ message: error.message });
       }
       return response
         .status(StatusCodes.BAD_REQUEST)
@@ -161,7 +161,7 @@ export class DeveloperController {
       if (error.statusCode) {
         return response
           .status(error.statusCode)
-          .json({ developer: {}, message: error.message });
+          .json({ message: error.message });
       }
       return response
         .status(StatusCodes.BAD_REQUEST)
