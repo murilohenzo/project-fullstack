@@ -1,0 +1,39 @@
+$background: #484349;
+$font-color: #F7F0F0;
+$font-color-hover: #f4cf0a;
+
+#container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+#container .actions {
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    margin-left: 10px;
+    font-weight: 500;
+    color: $font-color;
+    background-color: $background;
+
+    height: 46px;
+    width: 90px;
+
+    font-size: 18px;
+
+
+    border-radius: 5px;
+    border: 0;
+
+    &:hover {
+      color: $font-color-hover;
+    }
+
+    &:focus {
+      outline: 0;
+      color: $font-color-hover;
+    }
+  }
+}

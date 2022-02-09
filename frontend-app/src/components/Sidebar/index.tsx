@@ -1,11 +1,13 @@
 import { ProSidebar, SidebarHeader, SidebarFooter, SidebarContent, Menu, MenuItem } from 'react-pro-sidebar';
 import { IconBaseProps } from 'react-icons';
-import { FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
 import 'react-pro-sidebar/dist/css/styles.css';
+import { Link } from 'react-router-dom';
+
+import "./styles.scss";
+import { useState } from 'react';
 
 interface menuItemsProps {
   Icon?: React.ComponentType<IconBaseProps>;
-  colorIcon?: string;
   title: string,
   href: string
 }
@@ -26,17 +28,22 @@ export const SideBar: React.FC<SideBarProps> = (
     headerLogoIcon: Icon,
     headerTitle,
     menuItems,
-    footerTitle
+    footerTitle,
+    children
   }) => {
+
+  const [hasFocus, setFocus] = useState(false);
+
   return (
-    <div className='header'>
+    <>
+      <div id='header'>
         <ProSidebar collapsed={collapsed}>
           <SidebarHeader >
-            <div className="logotext">
+            <div className="logotext" onClick={ClickHandlerCollapsed}>
               {
                 collapsed ? (
                   <p>
-                    { Icon && <Icon size={20}/>}
+                    { Icon && <Icon size={26}/>}
                   </p>
                 ) : (
                   <p>
@@ -45,30 +52,27 @@ export const SideBar: React.FC<SideBarProps> = (
                 )
               }
             </div>
-            <div className="closemenu" onClick={ClickHandlerCollapsed}>
-                {collapsed ? (
-                  <FiArrowRightCircle size={20}/>
-                ) : (
-                  <FiArrowLeftCircle size={20}/>
-                )}
-            </div>
           </SidebarHeader>
         <SidebarContent>
         <Menu iconShape="square">
           {
             menuItems.map((item, index) => (
-              <MenuItem key={index} icon={item.Icon && <item.Icon size={20} color={item.colorIcon}></item.Icon>}>
+              <MenuItem key={index} icon={item.Icon && <item.Icon size={20}></item.Icon>}>
                 {item.title}
-                {item.href}
+                <Link to={item.href}/>
               </MenuItem>
             ))
           }
         </Menu>
         </SidebarContent>
         <SidebarFooter>
-          {footerTitle}
+          {collapsed ? "Devs" : footerTitle}
         </SidebarFooter>
       </ProSidebar>
+      <div className='children'>
+        {children}
+      </div>
     </div>
+    </>
   )
 };

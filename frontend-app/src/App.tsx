@@ -1,12 +1,19 @@
 import { BrowserRouter } from "react-router-dom";
+import { Menu } from "./pages/Menu";
 import { Routes } from "./routes";
+import GlobalStyle from "./styles/globalStyle";
 
-function App() {
-  return (
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const App: React.FC = () => (
+  <>
     <BrowserRouter>
-      <Routes />
+      <Menu>
+        <Routes />
+      </Menu>
+      <GlobalStyle />
     </BrowserRouter>
-  );
-}
+  </>
+);
 
 export default App;
