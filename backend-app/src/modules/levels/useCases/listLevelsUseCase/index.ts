@@ -16,6 +16,6 @@ export class ListLevelsUseCase {
 
     if (levels && levels.length > 0) return levels;
 
-    throw new AppError("Nao existe niveis na base", StatusCodes.NO_CONTENT);
+    throw new AppError("Nao existe niveis na base", StatusCodes.NOT_FOUND);
   }
 }

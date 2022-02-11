@@ -5,14 +5,11 @@ $font-color-hover: #f4cf0a;
 #header {
   display: flex;
   justify-content: flex-start;
-  height: 100%;
   width: 100%;
 }
 #header .pro-sidebar {
-  height: 100vh;
-}
-#header .pro-sidebar {
-  width: 200px;
+  height: 110vh;
+  width: 22 0px;
   min-width: 200px;
 }
 #header .pro-sidebar.collapsed {

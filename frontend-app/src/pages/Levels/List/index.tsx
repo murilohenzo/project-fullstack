@@ -11,36 +11,30 @@ import { api } from '../../../services/api';
 import { Input } from '../../../components/Forms/Input';
 
 import { toast } from 'react-toastify';
+
 interface InputNameProps {
   inputName: string;
 }
 
-const schema =
-Yup.object().shape({
-  inputName: Yup.string().required("Name is mandatory"),
-});
-
 const sizePerPage = 10;
-const defaultValues = {
-  inputName: "",
-}
 
 
-export const Devs = () => {
+export const Levels = () => {
   const history = useNavigate();
   const [pageNumber, setPageNumber] = useState(0);
-  const [totalDevelopers, setTotalDevelopers] = useState([]); 
-  const [developers, setDevelopers] = useState([]);
+  const [totalLevels, setTotalLevels] = useState([]); 
+  const [levels, setLevels] = useState([]);
 
   const { control, handleSubmit, formState: { errors } } = useForm({
-    defaultValues,
-    resolver: yupResolver(schema)
+    defaultValues: {
+      inputName: ""
+    },
   });
 
   useEffect(() => {
-    api.get("/developers")
+    api.get("/levels")
       .then((response) => {
-        setTotalDevelopers(response.data);
+        setTotalLevels(response.data);
       })
       .catch((error) => {
         toast.error(error.response.data.message, {
@@ -50,37 +44,33 @@ export const Devs = () => {
   }, [])
 
   const handlerClickSubmit: SubmitHandler<InputNameProps> = (data) => {    
-    console.log(data)
-    api.post("/developers/search", null, 
+    api.post("/levels/search", null, 
     {
       params: {
-        name: data.inputName
+        level: data.inputName
       }
     })
     .then((response: any) => {
-      console.log(response.data)
-        setDevelopers(response.data)
+        setLevels(response.data)
     })
     .catch((error) => {
       toast.error(error.response.data.message, {
         theme: 'light'
       })
     })
-}
+  }
 
   const handleTableChange = (type: any, { page, sizePerPage }: any) => {
-    api.post("developers/pagination", {
+    api.post("levels/pagination", {
       page: page,
       take: sizePerPage
     })
     .then((response) => {
       setPageNumber(page);
-      setDevelopers(response.data);
+      setLevels(response.data);
     })
     .catch((error) => {
-      toast.error(error.response.data.message, {
-        theme: 'light'
-      })
+      alert(error.response.data.message)
     })
   } 
   
@@ -88,31 +78,31 @@ export const Devs = () => {
     <>
       <Form onSubmit={handleSubmit(handlerClickSubmit)}>
         <Breadcrumb 
-            title='Developers'
+            title='Levels'
             items={[
               {
-                title: "Devs",
-                path: "/devs",
+                title: "Levels",
+                path: "/levels",
                 active: false,
               },
               {
-                title: "Listagem",
-                path: "/devs",
+                title: "List",
+                path: "/levels",
                 active: true
               }
             ]}
             actions={
               [
                 {
-                  title: 'Pesquisar',
+                  title: 'Search',
                   action: () => { },
                   type: 'submit',
                   color: 'btn btn-outline-primary'
                 },
                 {
-                  title: 'Novo',
-                  action: () => { history("/devs/new")},
-                  type: 'submit',
+                  title: 'New',
+                  action: () => { history("/levels/new") },
+                  type: 'button',
                   color: 'btn btn-outline-primary'
                 }
               ]
@@ -138,20 +128,17 @@ export const Devs = () => {
             <Col>
               <Table 
                 keyField="id"
-                data={developers}
+                data={levels}
                 columns={[
-                  { text: 'Level',dataField: 'level' },
-                  { text: 'Name', dataField: 'name' },
-                  { text: 'Sex', dataField: 'sex' },
-                  { text: 'Age', dataField: 'age' },
-                  { text: 'Birth Date', dataField: 'birth_date' },
+                  { text: 'Id',dataField: 'id' },
+                  { text: 'Level', dataField: 'level' },
                 ]}
                 //@ts-ignore
                 onTableChange={handleTableChange}
                 paginationOptions={{
                     page: pageNumber,
                     sizePerPage: sizePerPage,
-                    totalSize: totalDevelopers.length
+                    totalSize: totalLevels.length
                 }}
               />
             </Col>
