@@ -46,6 +46,7 @@ const Table: React.FC<TableProps> = memo(
         wrapperClasses="table-responsive"
         headerClasses="header-class"
         remote
+        hover
         onTableChange={onTableChange}
         {...conditionalProps}
         {...rest}
