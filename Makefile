@@ -5,4 +5,4 @@ down:
 	docker-compose down --rmi all
 
 pull:
-	gco main && git pull origin main
+	git checkout $(chk) && git pull origin $(chk)
