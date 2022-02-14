@@ -41,3 +41,4 @@ services:
 1. [Instalar Docker Compose](https://docs.docker.com/compose/install/)
 1. Clone este repo
 1. Rodar todos os containers com `docker-compose up ou docker-compose up -d`
+1. Outra alternativa fazendo `make build` para buildar os containers.
