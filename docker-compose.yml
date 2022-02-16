@@ -17,7 +17,7 @@ services:
       context: ./backend-app
       dockerfile: Dockerfile
     image: api
-    entrypoint: dockerize -wait tcp://db:5432 -timeout 30s 
+    # entrypoint: dockerize -wait tcp://db:5432 -timeout 30s 
     depends_on:
       - db
     command: yarn dev
