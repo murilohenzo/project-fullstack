@@ -16,11 +16,21 @@ import { api } from '../../../services/api';
 
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { DatePickerInput } from '../../../components/Forms/DatePicker';
+import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 interface DevsProps {
-  level_id: number;
+  level_id: {
+    value: number;
+    label: string;
+    message?: string
+  };
   name: string;
-  sex: string;
+  sex: {
+    value: number;
+    label: string;
+    message?: string
+  };
   birthDate: undefined;
   age: number;
   hobby: string;
@@ -44,9 +54,17 @@ export const FormDevs = () => {
 
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
-      level_id: 0,
+      level_id: {
+        value: 0,
+        label: '',
+        message: ''
+      },
       name: "",
-      sex: "",
+      sex: {
+        value: 0,
+        label: '',
+        message: ''
+      },
       birthDate: undefined,
       age: 0,
       hobby: ""
@@ -73,9 +91,9 @@ export const FormDevs = () => {
 
   const handlerClickSubmit = (data: DevsProps) => {    
     api.post("/developers", {
-      level_id: data.level_id,
+      level_id: data.level_id.value,
       name: data.name,
-      sex: data.sex,
+      sex: data.sex.value,
       birth_date: data.birthDate,
       age: data.age,
       hobby: data.hobby
@@ -139,11 +157,12 @@ export const FormDevs = () => {
                   name="level_id"
                   render={({ field: { value, onChange}}) => (
                     <DefaultSelect
-                      value={value}
+                      // value={value}
                       onChange={onChange}
                       label='Level'
                       name='level_id'
                       options={levels}
+                      // @ts-ignore
                       errorMessage={errors?.level_id?.message} />
                   )}
                 />
@@ -181,20 +200,8 @@ export const FormDevs = () => {
                           value: "Female"
                         },
                       ]}
+                      // @ts-ignore
                       errorMessage={errors?.sex?.message} />
-                  )}
-                />
-            </Col>
-            <Col md={3}>
-              <Controller
-                  control={control}
-                  name="name"
-                  render={({ field: { value, onChange}}) => (
-                    <Input
-                    value={value}
-                    onChange={onChange}
-                    label='Name'
-                    errorMessage={errors?.name?.message} />
                   )}
                 />
             </Col>
@@ -204,13 +211,13 @@ export const FormDevs = () => {
             <Controller
               control={control}
                 name="birthDate"
-                render={({ field: { onChange, onBlur, value, ref } }) => (
-                  <ReactDatePicker
+                render={({ field: { onChange, value } }) => (
+                  <DatePickerInput
                     onChange={onChange}
-                    onBlur={onBlur}
-                    selected={value}
-                    name="birthDate"
-                  />
+                    name="birthDate" 
+                    label='Birth Date'
+                    value={value}
+                 />
                 )}
               />
             </Col>
