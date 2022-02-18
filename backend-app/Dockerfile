@@ -2,7 +2,8 @@
 FROM node:14.18.2-alpine as builder
 
 WORKDIR /usr/app
-COPY package.json yarn.lock ./
+COPY package.json ./
+COPY yarn.lock ./
 RUN yarn install
 COPY . .
 
