@@ -1,5 +1,9 @@
 name: ci-nodejs-workflow
 
+defaults:
+  run:
+    working-directory: backend-app
+
 on: 
   push:
     branches:
@@ -17,8 +21,7 @@ jobs:
           node-version: '14.x'
       - run: npm install
       - run: npm test
-        working-directory: backend-app
-        
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       
