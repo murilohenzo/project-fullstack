@@ -31,8 +31,8 @@ jobs:
       - name: Build and push postgres-db
         uses: docker/build-push-action@v2
         with:
-          context: ./backend-app
-          file: Dockerfile.db.dev
+          context: .
+          file: backend-app/Dockerfile.db.dev
           push: false
           tags: murilohenzo/postgres_db
 
