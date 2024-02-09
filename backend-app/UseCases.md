@@ -1,18 +1,19 @@
-## Casos de usos do projeto
+## Use Cases of the Project
 
-### Casos de Usos de Nivel
-- [x] Listar níveis existentes
-- [x] Cadastrar um nível
-- [x] Editar um nível
-- [x] Remover um nível
-- [x] Impedir que um nível seja removido quando houver um (ou mais) desenvolvedor(es) associado a este
-- [x] Adicionar funcionalidade de busca via query string para a listagem de níveis
-- [x] Exibir na listagem de níveis a quantidade de desenvolvedores associados a ele (nível) numa nova coluna
-### Casos de Usos de Desenvolvedores
-- [x] Cadastrar um desenvolvedor
-- [x] Listar desenvolvedores existentes
-- [x] Editar um desenvolvedor
-- [x] Pegar desenvolvedor pelo id
-- [x] Remover um desenvolvedor
-- [x] Adicionar funcionalidade de busca via query string para a listagem de desenvolvedores
-- [x] Adicionar paginação na listagem de desenvolvedores
+### Level Use Cases
+- [x] List existing levels
+- [x] Register a level
+- [x] Edit a level
+- [x] Remove a level
+- [x] Prevent the removal of a level when one or more developers are associated with it
+- [x] Add functionality for search via query string in the list of levels
+- [x] Display the number of developers associated with each level in a new column in the list
+
+### Developer Use Cases
+- [x] Register a developer
+- [x] List existing developers
+- [x] Edit a developer
+- [x] Get a developer by ID
+- [x] Remove a developer
+- [x] Add functionality for search via query string in the list of developers
+- [x] Add pagination to the list of developers
