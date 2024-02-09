@@ -1,8 +1,8 @@
 # Project Fullstack
-- Cadastro de desenvolvedores, que possuem um determinado nível.
+- Registration of developers, each with a specific skill level.
 
-### [Casos de Uso](/backend-app/UseCases.md)
-### Docker Compose do Aplicação
+### [Use Cases](/backend-app/UseCases.md)
+### Docker Compose for the Application
 
 ```yaml
 version: '3'
@@ -36,9 +36,9 @@ services:
       - db
 ```
 
-### Como testar?
+### How to Test?
 
-1. [Instalar Docker Compose](https://docs.docker.com/compose/install/)
-1. Clone este repo
-1. Rodar todos os containers com `docker-compose up ou docker-compose up -d`
-1. Outra alternativa fazendo `make build` para buildar os containers.
+1. [Install Docker Compose](https://docs.docker.com/compose/install/)
+2. Clone this repository
+3. Run all containers with `docker-compose up` or `docker-compose up -d`
+4. Alternatively, use `make build` to build the containers.
